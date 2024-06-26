@@ -1,7 +1,12 @@
-import { useState } from 'react';
-import UsePaintingData from '../../../hooks/UsePaintingData';
-import styles from './Paintings.module.scss';
-import PaintingItems from './PaintingItems';
+import styles from "./Paintings.module.scss";
+import PaintingItems from "./PaintingItems";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+import { setSearchValue } from "../../../redux/filterSlice/slice";
+import { QueryClient, useMutation, useQueryClient } from "react-query";
+import usePaintingData from "../../../hooks/UsePaintingData";
+import { useEffect, useState } from "react";
+import GetPaintingData from "../../../utils/GetPaintingData";
 
 export type Painting = {
   id: number;
@@ -13,34 +18,26 @@ export type Painting = {
 };
 
 const Paintings = () => {
-  const { data, isLoading, error } = UsePaintingData();
-  //   console.log(data);
+  const { data, isLoading, error } = usePaintingData();
+  const { searchValue } = useSelector((state: RootState) => state.filter);
+  const dispatch = useDispatch();
+  console.log(data);
+  const submitForm = (e: any) => {
+    e.preventDefault();
+  };
 
-  const [searchValue, setSearchValue] = useState('');
-
-  const filteredBySearch = data
-    ?.filter((item: Painting) => {
-      if (item.name.toLowerCase().includes(searchValue.toLowerCase())) {
-        return true;
-      }
-      return false;
-    })
-    .map((item: Painting) => {
-      return <PaintingItems key={item.id} {...item} />;
-    });
-
-  if (isLoading) return 'Loading';
-  if (error) return 'Something went wrong' + error;
+  if (isLoading) return "Loading";
+  if (error) return "Something went wrong" + error;
 
   return (
     <main className={styles.main}>
       <div className={styles.filter}>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={submitForm}>
           <input
             type="text"
             placeholder="Painting title"
             value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
+            onChange={(e) => dispatch(setSearchValue(e.target.value))}
           />
           <img className={styles.icon_find} src="/icons/icon_find.png" alt="" />
         </form>
@@ -50,8 +47,8 @@ const Paintings = () => {
       </div>
 
       <div className={styles.painting_gallery}>
-        {filteredBySearch}
-        {/* {data.map((item: Painting) => {
+        {/* {filteredBySearch} */}
+        {data.map((item: Painting) => {
           return (
             <div key={item.id} className={styles.painting_item}>
               <div className={styles.painting_item_info}>
@@ -61,7 +58,7 @@ const Paintings = () => {
               <img src="/image 1.png" alt={item.name} />
             </div>
           );
-        })} */}
+        })}
       </div>
     </main>
   );

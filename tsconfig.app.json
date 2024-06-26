@@ -23,6 +23,10 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/**/*.ts", "package.json"],
-  "files": ["utils/GetPaintingData.ts", "hooks/UsePaintingData.ts"]
+  "include": ["src"],
+  "files": [
+    "utils/GetPaintingData.ts",
+    "hooks/UsePaintingData.ts",
+    "redux/store.ts"
+  ]
 }
