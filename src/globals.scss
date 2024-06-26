@@ -1,0 +1,34 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'commer';
+  src: url('./assets/fonts/CormorantSC-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'inter';
+  src: url('./assets/fonts/Inter.ttf');
+}
+
+:root {
+  --primary-black: #121212;
+  --secondary-black: #1a1818;
+  --clr-gold: #ab8956;
+
+  --primary-lightgrey: #dedede;
+
+  --font-headers: 'commer';
+  --font-years: 'inter';
+  --font-main: 'inter';
+}
+
+html,
+body,
+#root {
+  height: 100vh;
+  font-family: var(--font-main);
+}
