@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { setSearchValue } from '../../../redux/filterSlice/slice';
 import usePaintingData from '../../../hooks/UsePaintingData';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Pagination from '../Pagination';
 import Filter from '../Filter';
 import { AnimatePresence } from 'framer-motion';
+import PaintingItems from './PaintingItems';
 
 export type Painting = {
   id: number;
@@ -27,7 +28,7 @@ const Paintings = () => {
     refetch();
   }, [searchValue, pageNumber]);
 
-  const submitForm = (e: any) => {
+  const submitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
 
@@ -56,17 +57,18 @@ const Paintings = () => {
       </div>
 
       <div className={styles.painting_gallery}>
-        {data.map((item: Painting) => {
-          return (
-            <div key={item.id} className={styles.painting_item}>
-              <div className={styles.painting_item_info}>
-                <p className={styles.painting_item_header}>{item.name}</p>
-                <p className={styles.painting_item_year}>{item.created}</p>
-              </div>
-              <img src="/image 1.png" alt={item.name} />
-            </div>
-          );
-        })}
+        {data.length === 0 ? (
+          <div>
+            <p>
+              No matches for <strong>{searchValue}</strong>
+            </p>
+            <p>please try again with different spelling or keywords</p>
+          </div>
+        ) : (
+          data.map((item: Painting) => {
+            return <PaintingItems {...item} key={item.id} />;
+          })
+        )}
       </div>
 
       <Pagination />

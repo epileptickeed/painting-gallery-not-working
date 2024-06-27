@@ -8,11 +8,38 @@
   z-index: 1;
   background-color: var(--primary-black);
 
-  button {
+  .close_icon {
     position: absolute;
     right: 20px;
     top: 20px;
     background: none;
-    // padding: 1rem;
+  }
+}
+
+.filter_inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 5rem;
+
+  .filter_options {
+    padding-inline: 1.5rem;
+  }
+
+  .filter_options_inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+
+    h2 {
+      font-family: 'commer';
+      text-transform: uppercase;
+      font-weight: normal;
+    }
+
+    button {
+      background: none;
+    }
   }
 }
