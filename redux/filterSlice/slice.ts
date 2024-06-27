@@ -2,9 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface FilterSlice {
   searchValue: string;
+  pageNumber: number;
 }
 const initialState: FilterSlice = {
   searchValue: '',
+  pageNumber: 0,
 };
 
 export const filterSlice = createSlice({
@@ -14,9 +16,12 @@ export const filterSlice = createSlice({
     setSearchValue: (state, action) => {
       state.searchValue = action.payload;
     },
+    setPageNumber: (state, action) => {
+      state.pageNumber = action.payload;
+    },
   },
 });
 
-export const { setSearchValue } = filterSlice.actions;
+export const { setSearchValue, setPageNumber } = filterSlice.actions;
 
 export default filterSlice.reducer;

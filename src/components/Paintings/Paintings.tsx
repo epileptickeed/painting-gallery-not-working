@@ -1,12 +1,12 @@
-import styles from "./Paintings.module.scss";
-import PaintingItems from "./PaintingItems";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
-import { setSearchValue } from "../../../redux/filterSlice/slice";
-import { QueryClient, useMutation, useQueryClient } from "react-query";
-import usePaintingData from "../../../hooks/UsePaintingData";
-import { useEffect, useState } from "react";
-import GetPaintingData from "../../../utils/GetPaintingData";
+import styles from './Paintings.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { setSearchValue } from '../../../redux/filterSlice/slice';
+import usePaintingData from '../../../hooks/UsePaintingData';
+import { useEffect, useState } from 'react';
+import Pagination from '../Pagination';
+import Filter from '../Filter';
+import { AnimatePresence } from 'framer-motion';
 
 export type Painting = {
   id: number;
@@ -18,16 +18,21 @@ export type Painting = {
 };
 
 const Paintings = () => {
-  const { data, isLoading, error } = usePaintingData();
-  const { searchValue } = useSelector((state: RootState) => state.filter);
+  const { data, isLoading, error, refetch } = usePaintingData();
+  const { searchValue, pageNumber } = useSelector((state: RootState) => state.filter);
   const dispatch = useDispatch();
-  console.log(data);
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    refetch();
+  }, [searchValue, pageNumber]);
+
   const submitForm = (e: any) => {
     e.preventDefault();
   };
 
-  if (isLoading) return "Loading";
-  if (error) return "Something went wrong" + error;
+  if (isLoading) return 'Loading';
+  if (error) return 'Something went wrong' + error;
 
   return (
     <main className={styles.main}>
@@ -41,13 +46,16 @@ const Paintings = () => {
           />
           <img className={styles.icon_find} src="/icons/icon_find.png" alt="" />
         </form>
-        <button className={styles.button}>
+        <button className={styles.button} onClick={() => setIsActive(true)}>
           <img src="/icons/filter_icon_light.png" alt="filter_icon" />
         </button>
+
+        <AnimatePresence mode="wait">
+          {isActive && <Filter isActive={isActive} setIsActive={setIsActive} />}
+        </AnimatePresence>
       </div>
 
       <div className={styles.painting_gallery}>
-        {/* {filteredBySearch} */}
         {data.map((item: Painting) => {
           return (
             <div key={item.id} className={styles.painting_item}>
@@ -60,6 +68,8 @@ const Paintings = () => {
           );
         })}
       </div>
+
+      <Pagination />
     </main>
   );
 };

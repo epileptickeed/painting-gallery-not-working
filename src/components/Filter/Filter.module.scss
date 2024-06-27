@@ -1,0 +1,18 @@
+.filter_main {
+  border: 1px solid white;
+  position: fixed;
+  top: 0;
+  right: 150px;
+  height: 100%;
+  width: 400px;
+  z-index: 1;
+  background-color: var(--primary-black);
+
+  button {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background: none;
+    // padding: 1rem;
+  }
+}
