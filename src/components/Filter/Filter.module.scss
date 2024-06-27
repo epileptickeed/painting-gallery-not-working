@@ -2,7 +2,7 @@
   border: 1px solid white;
   position: fixed;
   top: 0;
-  right: 150px;
+  right: 17.8%;
   height: 100%;
   width: 400px;
   z-index: 1;
@@ -33,13 +33,28 @@
     cursor: pointer;
 
     h2 {
-      font-family: 'commer';
+      font-family: "commer";
       text-transform: uppercase;
       font-weight: normal;
     }
 
     button {
       background: none;
+    }
+  }
+}
+
+.options {
+  select {
+    width: 100%;
+    padding-block: 0.5rem;
+    background: var(--secondary-black);
+    border: none;
+    color: white;
+    border-radius: 4px;
+
+    option {
+      padding: 0.5rem;
     }
   }
 }

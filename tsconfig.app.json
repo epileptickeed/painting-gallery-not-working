@@ -27,6 +27,8 @@
   "files": [
     "utils/GetPaintingData.ts",
     "hooks/UsePaintingData.ts",
+    "utils/GetAuthorsData.ts",
+    "hooks/UseAuthorsData.ts",
     "redux/store.ts"
   ]
 }

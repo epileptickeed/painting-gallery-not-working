@@ -1,13 +1,13 @@
-import styles from './Paintings.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { setSearchValue } from '../../../redux/filterSlice/slice';
-import usePaintingData from '../../../hooks/UsePaintingData';
-import { FormEvent, useEffect, useState } from 'react';
-import Pagination from '../Pagination';
-import Filter from '../Filter';
-import { AnimatePresence } from 'framer-motion';
-import PaintingItems from './PaintingItems';
+import styles from "./Paintings.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+import { setSearchValue } from "../../../redux/filterSlice/slice";
+import usePaintingData from "../../../hooks/UsePaintingData";
+import { FormEvent, useEffect, useState } from "react";
+import Pagination from "../Pagination";
+import Filter from "../Filter";
+import { AnimatePresence } from "framer-motion";
+import PaintingItems from "./PaintingItems";
 
 export type Painting = {
   id: number;
@@ -20,7 +20,9 @@ export type Painting = {
 
 const Paintings = () => {
   const { data, isLoading, error, refetch } = usePaintingData();
-  const { searchValue, pageNumber } = useSelector((state: RootState) => state.filter);
+  const { searchValue, pageNumber } = useSelector(
+    (state: RootState) => state.filter
+  );
   const dispatch = useDispatch();
   const [isActive, setIsActive] = useState(false);
 
@@ -32,8 +34,8 @@ const Paintings = () => {
     e.preventDefault();
   };
 
-  if (isLoading) return 'Loading';
-  if (error) return 'Something went wrong' + error;
+  if (isLoading) return "Loading";
+  if (error) return "Something went wrong" + error;
 
   return (
     <main className={styles.main}>
