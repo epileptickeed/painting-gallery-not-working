@@ -21,6 +21,7 @@
   flex-direction: column;
   gap: 2rem;
   margin-top: 5rem;
+  padding-inline: 1rem;
 
   .filter_options {
     padding-inline: 1.5rem;
@@ -33,7 +34,7 @@
     cursor: pointer;
 
     h2 {
-      font-family: "commer";
+      font-family: 'commer';
       text-transform: uppercase;
       font-weight: normal;
     }
@@ -47,14 +48,14 @@
 .options {
   select {
     width: 100%;
-    padding-block: 0.5rem;
+    padding: 0.5rem;
     background: var(--secondary-black);
     border: none;
     color: white;
     border-radius: 4px;
-
-    option {
-      padding: 0.5rem;
-    }
+  }
+  select * {
+    background-color: red;
+    padding: 2rem;
   }
 }
