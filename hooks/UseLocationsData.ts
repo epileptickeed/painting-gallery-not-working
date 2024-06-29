@@ -1,6 +1,9 @@
-import { useQuery } from 'react-query';
-import GetLocationsData from '../utils/GetLocationsData';
+import { useQuery } from "react-query";
+import GetLocationsData from "../utils/GetLocationsData";
+import { useSelector } from "react-redux";
+import { optionSelector } from "../redux/optionsSlice/selector";
 
 export default function UseLocationsData() {
-  return useQuery(['locations'], () => GetLocationsData());
+  const { locationQuery } = useSelector(optionSelector);
+  return useQuery(["locations"], () => GetLocationsData(locationQuery));
 }

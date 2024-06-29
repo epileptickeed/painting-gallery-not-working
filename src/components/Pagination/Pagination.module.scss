@@ -3,6 +3,11 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  position: relative;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-bottom: 1rem;
 
   .pagination_item {
     padding: 0.5rem 0.7rem;
@@ -13,6 +18,14 @@
     &:hover {
       background-color: var(--secondary-black);
     }
+  }
+
+  .pagination_item_selected {
+    padding: 0.5rem 0.7rem;
+    transition: 0.25s ease all;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: var(--secondary-black);
   }
 
   button {
@@ -30,5 +43,11 @@
     &:hover {
       background-color: var(--secondary-black);
     }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .pagination {
+    gap: 0.2rem;
   }
 }

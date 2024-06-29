@@ -2,8 +2,9 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
+  gap: 1rem;
   height: 100%;
+  position: relative;
 }
 
 .filter {
@@ -53,6 +54,7 @@ main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  padding-bottom: 1rem;
 }
 
 .painting_item {
@@ -78,7 +80,7 @@ main {
     gap: 0.5rem;
 
     &::before {
-      content: '';
+      content: "";
       width: 4px;
       height: 42px;
       background-color: var(--clr-gold);
@@ -97,6 +99,45 @@ main {
       font-family: var(--font-years);
       color: var(--clr-gold);
       font-weight: bold;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .painting_gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .painting_item {
+    .painting_item_info {
+      &::before {
+        display: none;
+      }
+
+      &::after {
+        content: url("../../../public/icons/arrow_icon_right.png");
+        width: 24px;
+        height: 100%;
+        background-color: var(--clr-gold);
+        position: absolute;
+        right: 0%;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .painting_gallery {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .filter {
+    input {
+      width: 100%;
     }
   }
 }

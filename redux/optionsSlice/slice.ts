@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export type AuthorsProps = {
   name: string;
@@ -12,19 +12,23 @@ export type LocationsProps = {
 
 interface OptionsSliceProps {
   selectedAuthor: AuthorsProps[];
+  authorQuery: string;
   selectedLocation: LocationsProps[];
+  locationQuery: string;
   yearFirstValue: number;
   yearSecondValue: number;
 }
 const initialState: OptionsSliceProps = {
   selectedAuthor: [],
+  authorQuery: "",
   selectedLocation: [],
+  locationQuery: "",
   yearFirstValue: 0,
   yearSecondValue: 0,
 };
 
 export const optionsSlice = createSlice({
-  name: 'options',
+  name: "options",
   initialState,
   reducers: {
     setSelectedAuthor: (state, action) => {
@@ -39,10 +43,22 @@ export const optionsSlice = createSlice({
     setYearSecondValue: (state, action) => {
       state.yearSecondValue = action.payload;
     },
+    setAuthorQuery: (state, action) => {
+      state.authorQuery = action.payload;
+    },
+    setLocationQuery: (state, action) => {
+      state.locationQuery = action.payload;
+    },
   },
 });
 
-export const { setSelectedAuthor, setSelectedLocation, setYearFirstValue, setYearSecondValue } =
-  optionsSlice.actions;
+export const {
+  setSelectedAuthor,
+  setSelectedLocation,
+  setYearFirstValue,
+  setYearSecondValue,
+  setAuthorQuery,
+  setLocationQuery,
+} = optionsSlice.actions;
 
 export default optionsSlice.reducer;

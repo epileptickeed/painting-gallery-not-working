@@ -1,8 +1,7 @@
 .filter_main {
-  border: 1px solid white;
   position: fixed;
   top: 0;
-  right: 17.8%;
+  right: 0%;
   height: 100%;
   width: 400px;
   z-index: 1;
@@ -34,7 +33,7 @@
     cursor: pointer;
 
     h2 {
-      font-family: 'commer';
+      font-family: "commer";
       text-transform: uppercase;
       font-weight: normal;
     }
@@ -45,17 +44,32 @@
   }
 }
 
-.options {
-  select {
+.handleButtons {
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem 1rem;
+  position: relative;
+  background-color: none;
+
+  button {
+    background: none;
     width: 100%;
-    padding: 0.5rem;
-    background: var(--secondary-black);
-    border: none;
     color: white;
-    border-radius: 4px;
+    text-decoration: underline;
+    font-family: "inter";
+    font-size: 1rem;
+
+    .btn_showResults {
+      float: left;
+    }
   }
-  select * {
-    background-color: red;
-    padding: 2rem;
+  .btn_clear {
+    color: var(--primary-darkGrey);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .filter_main {
+    width: 90%;
   }
 }
