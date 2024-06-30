@@ -22,6 +22,7 @@ const Pagination = () => {
   return (
     <div className={styles.pagination}>
       <button
+        className={styles.arrowBtn}
         onClick={() =>
           pageNumber === firstPage
             ? false
@@ -46,6 +47,7 @@ const Pagination = () => {
         );
       })}
       <button
+        className={styles.arrowBtn}
         onClick={() =>
           pageNumber === lastPage
             ? false

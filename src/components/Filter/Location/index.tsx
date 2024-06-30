@@ -1,5 +1,5 @@
 import styles from "./Locations.module.scss";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import { motion } from "framer-motion";
 import UseLocationsData from "../../../../hooks/UseLocationsData";
 import { useDispatch, useSelector } from "react-redux";
@@ -51,6 +51,10 @@ const Location = () => {
     setAreOptionsVisible(false);
   };
 
+  const handleSubmitForm = (e: FormEvent) => {
+    e.preventDefault();
+  };
+
   if (!locations) {
     return (
       <div ref={scope}>
@@ -78,7 +82,7 @@ const Location = () => {
         ref={scope}
         style={{ display: isSelectorVisible ? "block" : "none" }}
       >
-        <motion.form>
+        <motion.form onSubmit={handleSubmitForm}>
           <motion.input
             type="text"
             whileTap={{ scale: 0.97 }}

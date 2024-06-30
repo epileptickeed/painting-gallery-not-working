@@ -1,0 +1,37 @@
+.years_menu {
+  .years_menu_inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 1rem;
+    cursor: pointer;
+
+    h2 {
+      font-family: "commer";
+      text-transform: uppercase;
+      font-weight: normal;
+      color: var(--header-clr);
+    }
+  }
+}
+
+.years_options {
+  width: 100%;
+  gap: 1rem;
+
+  form {
+    width: 67px;
+    input {
+      padding: 1rem;
+      width: 100%;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        display: none;
+      }
+      &::placeholder {
+        text-align: center;
+      }
+    }
+  }
+}

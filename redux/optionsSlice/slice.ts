@@ -15,16 +15,16 @@ interface OptionsSliceProps {
   authorQuery: string;
   selectedLocation: LocationsProps[];
   locationQuery: string;
-  yearFirstValue: number;
-  yearSecondValue: number;
+  yearFirstValue: number | string;
+  yearSecondValue: number | string;
 }
 const initialState: OptionsSliceProps = {
   selectedAuthor: [],
   authorQuery: "",
   selectedLocation: [],
   locationQuery: "",
-  yearFirstValue: 0,
-  yearSecondValue: 0,
+  yearFirstValue: "",
+  yearSecondValue: "",
 };
 
 export const optionsSlice = createSlice({

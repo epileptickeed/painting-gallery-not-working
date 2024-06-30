@@ -3,15 +3,30 @@
   top: 0;
   right: 0%;
   height: 100%;
-  width: 400px;
-  z-index: 1;
-  background-color: var(--primary-black);
+  width: 492px;
+  z-index: 2;
+  background-color: var(--primary-clr);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 2rem;
 
   .close_icon {
     position: absolute;
     right: 20px;
     top: 20px;
     background: none;
+    background: var(--secondary-clr);
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background: #cacaca50;
+    }
   }
 }
 
@@ -47,29 +62,48 @@
 .handleButtons {
   display: flex;
   justify-content: space-between;
-  padding: 3rem 1rem;
+  padding: 25% 1rem;
   position: relative;
   background-color: none;
 
-  button {
+  .btn_showResults {
     background: none;
-    width: 100%;
-    color: white;
-    text-decoration: underline;
-    font-family: "inter";
-    font-size: 1rem;
-
-    .btn_showResults {
-      float: left;
-    }
+    border: none;
+    color: var(--header-clr);
+    border-bottom: 2px solid var(--header-clr);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
   }
+
   .btn_clear {
+    background: none;
+    border: none;
     color: var(--primary-darkGrey);
+    border-bottom: 2px solid var(--primary-darkGrey);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .btn_clear_disabled {
+    background: none;
+    border: none;
+    color: #444;
+    border-bottom: 2px solid #444;
+    cursor: disabled;
+    font-size: 16px;
+    font-weight: bold;
   }
 }
 
 @media screen and (max-width: 768px) {
   .filter_main {
     width: 90%;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .filter_main {
+    padding: 0;
   }
 }

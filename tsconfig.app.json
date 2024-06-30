@@ -36,6 +36,7 @@
     "redux/optionsSlice/slice.ts",
     "redux/optionsSlice/selector.ts",
     "redux/filterSlice/selector.ts",
-    "redux/filterSlice/slice.ts"
+    "redux/filterSlice/slice.ts",
+    "redux/themeSlice/slice.ts"
   ]
 }

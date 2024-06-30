@@ -20,11 +20,21 @@ export type Painting = {
 const Paintings = () => {
   const { data, isLoading, error, refetch } = usePaintingData();
   const { searchValue, pageNumber } = useSelector(filterSelector);
-  const { selectedAuthor, selectedLocation } = useSelector(optionSelector);
+  const { selectedAuthor, selectedLocation, yearFirstValue, yearSecondValue } =
+    useSelector(optionSelector);
 
   useEffect(() => {
     refetch();
-  }, [searchValue, pageNumber, selectedAuthor, selectedLocation]);
+  }, [
+    searchValue,
+    pageNumber,
+    selectedAuthor,
+    selectedLocation,
+    yearFirstValue,
+    yearSecondValue,
+  ]);
+
+  // console.log(data);
 
   if (isLoading) return "Loading";
   if (error) return "Something went wrong" + error;
@@ -35,7 +45,7 @@ const Paintings = () => {
 
       <div className={styles.painting_gallery}>
         {data.length === 0 ? (
-          <div>
+          <div className={styles.no_matches}>
             <p>
               No matches for <strong>{searchValue} </strong>
               <strong>{selectedAuthor.name} </strong>

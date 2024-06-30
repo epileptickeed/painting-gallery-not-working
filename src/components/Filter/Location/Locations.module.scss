@@ -7,9 +7,10 @@
     cursor: pointer;
 
     h2 {
-      font-family: 'commer';
+      font-family: "commer";
       text-transform: uppercase;
       font-weight: normal;
+      color: var(--header-clr);
     }
   }
 }
@@ -30,7 +31,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: white;
+    color: var(--header-clr);
 
     span {
       color: white;
@@ -38,7 +39,7 @@
   }
 
   .list_main {
-    background-color: var(--secondary-black);
+    background-color: var(--secondary-clr);
     padding-block: 0.5rem;
     max-height: 270px;
     overflow-y: auto;
@@ -52,6 +53,7 @@
       padding: 1rem 0.5rem;
       transition: all 0.15s ease;
       cursor: pointer;
+      color: var(--header-clr);
 
       &:hover {
         background-color: var(--primary-darkGrey);
@@ -67,6 +69,16 @@
       border-radius: 1rem;
       padding-block: 0.5rem;
       height: 1px;
+    }
+  }
+}
+
+[data-theme="light"] {
+  .list_main {
+    li {
+      &:hover {
+        background-color: var(--primary-lightgrey);
+      }
     }
   }
 }

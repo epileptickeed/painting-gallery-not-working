@@ -11,6 +11,8 @@ import Filter from "../../Filter";
 
 const FilterForm = () => {
   const { searchValue } = useSelector((state: RootState) => state.filter);
+  const { isThemeLight } = useSelector((state: RootState) => state.theme);
+
   const submitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
@@ -31,10 +33,28 @@ const FilterForm = () => {
           value={searchValue}
           onChange={(e) => handleInputQuery(e)}
         />
-        <img className={styles.icon_find} src="/icons/icon_find.png" alt="" />
+        <img
+          className={styles.icon_find}
+          src={
+            isThemeLight
+              ? "/icons/search_icon_dark.png"
+              : "/icons/icon_find.png"
+          }
+          alt=""
+        />
       </form>
-      <button className={styles.button} onClick={() => setIsActive(true)}>
-        <img src="/icons/filter_icon_light.png" alt="filter_icon" />
+      <button
+        className={styles.openFilterBtn}
+        onClick={() => setIsActive(true)}
+      >
+        <img
+          src={
+            isThemeLight
+              ? "/icons/filter_icon_dark.png"
+              : "/icons/filter_icon_light.png"
+          }
+          alt="filter_icon"
+        />
       </button>
 
       <AnimatePresence mode="wait">

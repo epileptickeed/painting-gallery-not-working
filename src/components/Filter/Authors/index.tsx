@@ -1,5 +1,5 @@
 import styles from "./Authors.module.scss";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -51,6 +51,10 @@ const Authors = () => {
     authors.refetch();
   }, [authorQuery]);
 
+  const handleSubmitForm = (e: FormEvent) => {
+    e.preventDefault();
+  };
+
   if (!authors) {
     return (
       <div ref={scope}>
@@ -60,9 +64,9 @@ const Authors = () => {
   }
 
   return (
-    <div className={styles.locations_menu}>
+    <div className={styles.authors_menu}>
       <div
-        className={styles.locations_menu_inner}
+        className={styles.authors_menu_inner}
         onClick={() => setIsSelectorVisible(!isSelectorVisible)}
       >
         <h2>Artists</h2>
@@ -74,11 +78,11 @@ const Authors = () => {
         />
       </div>
       <nav
-        className={styles.locations_options}
+        className={styles.authors_options}
         ref={scope}
         style={{ display: isSelectorVisible ? "block" : "none" }}
       >
-        <motion.form>
+        <motion.form onSubmit={handleSubmitForm}>
           <motion.input
             type="text"
             whileTap={{ scale: 0.97 }}
