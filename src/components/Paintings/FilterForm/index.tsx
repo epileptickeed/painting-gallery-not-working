@@ -37,8 +37,8 @@ const FilterForm = () => {
           className={styles.icon_find}
           src={
             isThemeLight
-              ? "/icons/search_icon_dark.png"
-              : "/icons/icon_find.png"
+              ? "public/icons/search_icon_dark.png"
+              : "public/icons/icon_find.png"
           }
           alt=""
         />
@@ -50,8 +50,8 @@ const FilterForm = () => {
         <img
           src={
             isThemeLight
-              ? "/icons/filter_icon_dark.png"
-              : "/icons/filter_icon_light.png"
+              ? "public/icons/filter_icon_dark.png"
+              : "public/icons/filter_icon_light.png"
           }
           alt="filter_icon"
         />

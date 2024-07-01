@@ -11,7 +11,7 @@ const PaintingItems = ({
   id,
   name,
   created,
-  imageUrl,
+  // imageUrl,
   authorId,
   locationId,
 }: Painting) => {
@@ -37,7 +37,7 @@ const PaintingItems = ({
           <p className={styles.painting_item_location}>{location?.location}</p>
         </div>
       </div>
-      <img src={"/image 1.png"} alt={name} />
+      <img src={"public/image_1.png"} alt={name} />
     </div>
   );
 };

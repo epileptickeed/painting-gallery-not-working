@@ -32,7 +32,9 @@ const Years = () => {
         <h2>Years</h2>
         <img
           src={
-            isSelectorVisible ? "/icons/minus_icon.png" : "/icons/plus_icon.png"
+            isSelectorVisible
+              ? "public/icons/minus_icon.png"
+              : "public/icons/plus_icon.png"
           }
           alt="icon"
         />
@@ -53,7 +55,7 @@ const Years = () => {
             onChange={(e) => dispatch(setYearFirstValue(e.target.value))}
           />
         </form>
-        <img src="/icons/minus_icon.png" alt="icon" />
+        <img src="public/icons/minus_icon.png" alt="icon" />
         <form onSubmit={handleSubmitForm}>
           <input
             type="number"
