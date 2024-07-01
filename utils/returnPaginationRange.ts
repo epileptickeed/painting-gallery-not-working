@@ -3,7 +3,7 @@ import _ from "lodash";
 export const returnPaginationRange = (
   totalPage: number,
   page: number,
-  limit: number,
+  // limit: number,
   siblings: number
 ) => {
   let totalPageNumInArray = 1 + siblings;
@@ -21,7 +21,7 @@ export const returnPaginationRange = (
     let leftRange = _.range(1, leftItemsCount + 1);
     return [...leftRange, "...", totalPage];
   } else if (showLeftDots && !showRightDots) {
-    let rightItemsCount = 1 + 2 * siblings;
+    let rightItemsCount = 1 + 3 * siblings;
     let rightRange = _.range(totalPage - rightItemsCount + 1, totalPage + 1);
     return [1, "...", ...rightRange];
   } else {

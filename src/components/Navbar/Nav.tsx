@@ -20,11 +20,18 @@ const Nav = () => {
 
   return (
     <nav className={styles.navbar}>
-      <img src={isThemeLight ? "/logo_dark.png" : "/logo.png"} alt="logo" />
+      <img
+        src={isThemeLight ? "public/logo_dark.png" : "public/logo.png"}
+        alt="logo"
+      />
       <button onClick={() => dispatch(toggleTheme())}>
         <img
           className={styles.light_icon}
-          src={isThemeLight ? "/icons/dark_icon.png" : "/icons/light_icon.png"}
+          src={
+            isThemeLight
+              ? "public/icons/dark_icon.png"
+              : "public/icons/light_icon.png"
+          }
           alt=""
         />
       </button>

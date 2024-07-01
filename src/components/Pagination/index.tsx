@@ -18,12 +18,11 @@ const Pagination = () => {
   );
   const lastPage = numberOfPages.length;
   const firstPage = 1;
-  console.log(pageNumber);
 
   let availablePages: (string | number)[] = returnPaginationRange(
     maxPages,
     pageNumber,
-    2,
+    // 2,
     1
   );
 

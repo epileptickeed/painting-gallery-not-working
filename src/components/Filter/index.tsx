@@ -56,8 +56,8 @@ const Filter = ({ setIsActive }: Active) => {
         <img
           src={
             isThemeLight
-              ? "/icons/close_icon.png"
-              : "/icons/close_icon_light.png"
+              ? "public/icons/close_icon.png"
+              : "public/icons/close_icon_light.png"
           }
           alt="close_icon"
         />
