@@ -1,37 +1,41 @@
-import styles from './Authors.module.scss';
-import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { useDispatch, useSelector } from 'react-redux';
-import { AuthorsProps, setSelectedAuthor } from '../../../../redux/optionsSlice/slice';
-import useMenuAnimation from '../anim';
-import { optionSelector } from '../../../../redux/optionsSlice/selector';
-import UseAuthorsData from '../../../../hooks/UseAuthorsData';
+import styles from "./Authors.module.scss";
+import { useState, useEffect, useRef, FormEvent } from "react";
+import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  AuthorsProps,
+  setAuthorQuery,
+  setSelectedAuthor,
+} from "../../../../redux/optionsSlice/slice";
+import useMenuAnimation from "../anim";
+import { optionSelector } from "../../../../redux/optionsSlice/selector";
+import UseAuthorsData from "../../../../hooks/UseAuthorsData";
+import { setPageNumber } from "../../../../redux/filterSlice/slice";
 
 const Authors = () => {
   const [areOptionsVisible, setAreOptionsVisible] = useState(false);
   const [isSelectorVisible, setIsSelectorVisible] = useState(false);
-  const [userInput, setUserInput] = useState('');
   const dispatch = useDispatch();
 
-  const { selectedAuthor } = useSelector(optionSelector);
+  const { selectedAuthor, authorQuery } = useSelector(optionSelector);
   const authors = UseAuthorsData();
 
   const optionsContainer = useRef<HTMLUListElement | null>(null);
   const optionsButton = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    const handler = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         !optionsContainer.current?.contains(event.target as Node) &&
-        event.target != optionsButton.current
+        event.target !== optionsButton.current
       ) {
-        setAreOptionsVisible(!optionsContainer);
+        setAreOptionsVisible(false);
       }
     };
 
-    window.addEventListener('mousedown', handler);
+    window.addEventListener("click", handleClickOutside);
     return () => {
-      window.addEventListener('mousedown', handler);
+      window.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
@@ -39,7 +43,16 @@ const Authors = () => {
 
   const handleSelectAuthor = (author: AuthorsProps) => {
     dispatch(setSelectedAuthor(author));
+    dispatch(setPageNumber(1));
     setAreOptionsVisible(false);
+  };
+
+  useEffect(() => {
+    authors.refetch();
+  }, [authorQuery]);
+
+  const handleSubmitForm = (e: FormEvent) => {
+    e.preventDefault();
   };
 
   if (!authors) {
@@ -50,22 +63,34 @@ const Authors = () => {
     );
   }
 
+  if (authors.error) {
+    return (
+      <div ref={scope}>
+        <p>Something went wrong</p>
+      </div>
+    );
+  }
+
   return (
-    <div className={styles.locations_menu}>
+    <div className={styles.authors_menu}>
       <div
-        className={styles.locations_menu_inner}
-        onClick={() => setIsSelectorVisible(!isSelectorVisible)}>
+        className={styles.authors_menu_inner}
+        onClick={() => setIsSelectorVisible(!isSelectorVisible)}
+      >
         <h2>Artists</h2>
         <img
-          src={isSelectorVisible ? '/icons/minus_icon.png' : '/icons/plus_icon.png'}
+          src={
+            isSelectorVisible ? "/icons/minus_icon.png" : "/icons/plus_icon.png"
+          }
           alt="icon"
         />
       </div>
       <nav
-        className={styles.locations_options}
+        className={styles.authors_options}
         ref={scope}
-        style={{ display: isSelectorVisible ? 'block' : 'none' }}>
-        <motion.form>
+        style={{ display: isSelectorVisible ? "block" : "none" }}
+      >
+        <motion.form onSubmit={handleSubmitForm}>
           <motion.input
             type="text"
             whileTap={{ scale: 0.97 }}
@@ -73,26 +98,31 @@ const Authors = () => {
             className={styles.menu_btn}
             ref={optionsButton}
             placeholder="Select the author"
-            value={selectedAuthor.name || userInput}
-            onChange={(e) => setUserInput(e.target.value)}
+            value={selectedAuthor.name || authorQuery}
+            onChange={(e) => dispatch(setAuthorQuery(e.target.value))}
           />
 
           <div
             className="arrow"
-            style={{ transformOrigin: '50% 45%', position: 'absolute', right: 10, top: '20%' }}>
+            style={{
+              transformOrigin: "50% 45%",
+              position: "absolute",
+              right: 10,
+              top: "20%",
+            }}
+          >
             <img src="/icons/expand_icon.png" alt="icon" />
           </div>
         </motion.form>
 
-        {/* </motion.button> */}
-
         <ul
           style={{
-            pointerEvents: areOptionsVisible ? 'auto' : 'none',
-            clipPath: 'inset(10% 50% 90% 50% round 10px)',
+            pointerEvents: areOptionsVisible ? "auto" : "none",
+            clipPath: "inset(10% 50% 90% 50% round 10px)",
           }}
           className={styles.list_main}
-          ref={optionsContainer}>
+          ref={optionsContainer}
+        >
           {authors?.data?.length > 0 ? (
             authors.data.map((item: AuthorsProps) => {
               return (
@@ -102,7 +132,7 @@ const Authors = () => {
               );
             })
           ) : (
-            <li>No authors available</li>
+            <li>There are no matching results for your query</li>
           )}
         </ul>
       </nav>

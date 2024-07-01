@@ -1,13 +1,21 @@
-import { useQuery } from 'react-query';
-import GetPaintingData from '../utils/GetPaintingData';
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
-import { optionSelector } from '../redux/optionsSlice/selector';
+import { useQuery } from "react-query";
+import GetPaintingData from "../utils/GetPaintingData";
+import { useSelector } from "react-redux";
+import { optionSelector } from "../redux/optionsSlice/selector";
+import { filterSelector } from "../redux/filterSlice/selector";
 
 export default function usePaintingData() {
-  const { searchValue, pageNumber } = useSelector((state: RootState) => state.filter);
-  const { selectedAuthor, selectedLocation } = useSelector(optionSelector);
-  return useQuery(['paintings'], () =>
-    GetPaintingData(searchValue, pageNumber, selectedAuthor, selectedLocation),
+  const { searchValue, pageNumber } = useSelector(filterSelector);
+  const { selectedAuthor, selectedLocation, yearFirstValue, yearSecondValue } =
+    useSelector(optionSelector);
+  return useQuery(["paintings"], () =>
+    GetPaintingData(
+      searchValue,
+      pageNumber,
+      selectedAuthor,
+      selectedLocation,
+      yearFirstValue,
+      yearSecondValue
+    )
   );
 }

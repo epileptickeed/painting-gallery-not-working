@@ -1,16 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 interface FilterSlice {
   searchValue: string;
   pageNumber: number;
 }
 const initialState: FilterSlice = {
-  searchValue: '',
-  pageNumber: 0,
+  searchValue: "",
+  pageNumber: 1,
 };
 
 export const filterSlice = createSlice({
-  name: 'filter',
+  name: "filter",
   initialState,
   reducers: {
     setSearchValue: (state, action) => {

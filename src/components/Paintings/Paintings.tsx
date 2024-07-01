@@ -1,14 +1,12 @@
-import styles from './Paintings.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { setSearchValue } from '../../../redux/filterSlice/slice';
-import usePaintingData from '../../../hooks/UsePaintingData';
-import { FormEvent, useEffect, useState } from 'react';
-import Pagination from '../Pagination';
-import Filter from '../Filter';
-import { AnimatePresence } from 'framer-motion';
-import PaintingItems from './PaintingItems';
-import { optionSelector } from '../../../redux/optionsSlice/selector';
+import styles from "./Paintings.module.scss";
+import { useSelector } from "react-redux";
+import usePaintingData from "../../../hooks/UsePaintingData";
+import { useEffect } from "react";
+import Pagination from "../Pagination";
+import PaintingItems from "./PaintingItems";
+import { optionSelector } from "../../../redux/optionsSlice/selector";
+import FilterForm from "./FilterForm";
+import { filterSelector } from "../../../redux/filterSlice/selector";
 
 export type Painting = {
   id: number;
@@ -21,57 +19,46 @@ export type Painting = {
 
 const Paintings = () => {
   const { data, isLoading, error, refetch } = usePaintingData();
-  const { searchValue, pageNumber } = useSelector((state: RootState) => state.filter);
-  const { selectedAuthor } = useSelector(optionSelector);
-  const dispatch = useDispatch();
-  const [isActive, setIsActive] = useState(false);
-
-  console.log(selectedAuthor);
+  const { searchValue, pageNumber } = useSelector(filterSelector);
+  const { selectedAuthor, selectedLocation, yearFirstValue, yearSecondValue } =
+    useSelector(optionSelector);
 
   useEffect(() => {
     refetch();
-  }, [searchValue, pageNumber, selectedAuthor]);
+  }, [
+    searchValue,
+    pageNumber,
+    selectedAuthor,
+    selectedLocation,
+    yearFirstValue,
+    yearSecondValue,
+  ]);
 
-  // console.log(data);
-
-  const submitForm = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
-
-  if (isLoading) return 'Loading';
-  if (error) return 'Something went wrong' + error;
+  if (isLoading) return "Loading";
+  if (error) return "Something went wrong" + error;
 
   return (
     <main className={styles.main}>
-      <div className={styles.filter}>
-        <form className={styles.form} onSubmit={submitForm}>
-          <input
-            type="text"
-            placeholder="Painting title"
-            value={searchValue}
-            onChange={(e) => dispatch(setSearchValue(e.target.value))}
-          />
-          <img className={styles.icon_find} src="/icons/icon_find.png" alt="" />
-        </form>
-        <button className={styles.button} onClick={() => setIsActive(true)}>
-          <img src="/icons/filter_icon_light.png" alt="filter_icon" />
-        </button>
-
-        <AnimatePresence mode="wait">
-          {isActive && <Filter isActive={isActive} setIsActive={setIsActive} />}
-        </AnimatePresence>
-      </div>
+      <FilterForm />
 
       <div className={styles.painting_gallery}>
-        {data.length === 0 ? (
-          <div>
+        {data?.paintings.length === 0 ? (
+          <div className={styles.no_matches}>
             <p>
-              No matches for <strong>{searchValue}</strong>
+              No matches for <strong>{searchValue} </strong>
+              <strong>{selectedAuthor.name} </strong>
+              <strong>{selectedLocation.location} </strong>
+              {yearSecondValue ? (
+                <strong>{yearFirstValue} - </strong>
+              ) : (
+                <strong>{yearFirstValue}</strong>
+              )}
+              <strong>{yearSecondValue}</strong>
             </p>
             <p>please try again with different spelling or keywords</p>
           </div>
         ) : (
-          data.map((item: Painting) => {
+          data?.paintings.map((item: Painting) => {
             return <PaintingItems {...item} key={item.id} />;
           })
         )}

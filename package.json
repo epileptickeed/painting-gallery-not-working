@@ -14,6 +14,8 @@
     "axios": "^1.7.2",
     "eslint-config-airbnb-typescript": "^18.0.0",
     "framer-motion": "^11.2.12",
+    "lodash": "^4.17.21",
+    "lodash.range": "^3.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-query": "^3.39.3",
@@ -21,6 +23,7 @@
     "sass": "^1.77.6"
   },
   "devDependencies": {
+    "@types/lodash.range": "^3.2.9",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
