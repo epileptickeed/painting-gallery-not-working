@@ -22,7 +22,7 @@ const Pagination = () => {
   let availablePages: (string | number)[] = returnPaginationRange(
     maxPages,
     pageNumber,
-    2,
+    // 2,
     1
   );
 
