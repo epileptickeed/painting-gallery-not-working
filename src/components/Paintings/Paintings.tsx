@@ -34,8 +34,6 @@ const Paintings = () => {
     yearSecondValue,
   ]);
 
-  // console.log(data);
-
   if (isLoading) return "Loading";
   if (error) return "Something went wrong" + error;
 
@@ -44,17 +42,23 @@ const Paintings = () => {
       <FilterForm />
 
       <div className={styles.painting_gallery}>
-        {data.length === 0 ? (
+        {data?.paintings.length === 0 ? (
           <div className={styles.no_matches}>
             <p>
               No matches for <strong>{searchValue} </strong>
               <strong>{selectedAuthor.name} </strong>
-              <strong>{selectedLocation.location}</strong>
+              <strong>{selectedLocation.location} </strong>
+              {yearSecondValue ? (
+                <strong>{yearFirstValue} - </strong>
+              ) : (
+                <strong>{yearFirstValue}</strong>
+              )}
+              <strong>{yearSecondValue}</strong>
             </p>
             <p>please try again with different spelling or keywords</p>
           </div>
         ) : (
-          data.map((item: Painting) => {
+          data?.paintings.map((item: Painting) => {
             return <PaintingItems {...item} key={item.id} />;
           })
         )}

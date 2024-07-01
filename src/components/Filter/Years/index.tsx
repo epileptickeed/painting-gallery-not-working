@@ -47,7 +47,6 @@ const Years = () => {
             type="number"
             className={styles.menu_btn}
             placeholder="From"
-            min={0}
             max={2024}
             value={yearFirstValue}
             onInput={(e) => MaxInputLength(e)}
@@ -60,7 +59,6 @@ const Years = () => {
             type="number"
             className={styles.menu_btn}
             placeholder="To"
-            min={0}
             max={2024}
             value={yearSecondValue}
             onInput={(e) => MaxInputLength(e)}

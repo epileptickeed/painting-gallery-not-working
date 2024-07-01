@@ -32,6 +32,8 @@
     "utils/GetLocationsData.ts",
     "hooks/UseLocationsData.ts",
 
+    "utils/returnPaginationRange.ts",
+
     "redux/store.ts",
     "redux/optionsSlice/slice.ts",
     "redux/optionsSlice/selector.ts",

@@ -63,6 +63,14 @@ const Authors = () => {
     );
   }
 
+  if (authors.error) {
+    return (
+      <div ref={scope}>
+        <p>Something went wrong</p>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.authors_menu}>
       <div

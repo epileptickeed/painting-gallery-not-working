@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import { AuthorsProps, LocationsProps } from "../redux/optionsSlice/slice";
 
 export default async function GetPaintingData(
@@ -18,9 +17,15 @@ export default async function GetPaintingData(
 
   const firstRange = from ? `&created_gte=${from}` : ``;
   const secondRange = to ? `&created_lte=${to}` : "";
+  const allPaintings = await axios.get(
+    `https://test-front.framework.team/paintings?${search}${author}${location}${firstRange}${secondRange}`
+  );
 
   const paintings = await axios.get(
     `https://test-front.framework.team/paintings?${search}&_limit=6&_page=${page}${author}${location}${firstRange}${secondRange}`
   );
-  return paintings.data;
+  return {
+    allPaintings: allPaintings.data,
+    paintings: paintings.data,
+  };
 }

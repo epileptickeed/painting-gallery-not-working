@@ -63,6 +63,14 @@ const Location = () => {
     );
   }
 
+  if (locations.error) {
+    return (
+      <div ref={scope}>
+        <p>Something went wrong</p>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.locations_menu}>
       <div
