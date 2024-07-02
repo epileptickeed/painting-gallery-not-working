@@ -34,6 +34,8 @@ const Paintings = () => {
     yearSecondValue,
   ]);
 
+  console.log(data);
+
   if (isLoading) return "Loading";
   if (error) return "Something went wrong" + error;
 
